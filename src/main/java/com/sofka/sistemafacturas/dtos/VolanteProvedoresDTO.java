@@ -8,12 +8,12 @@ public class VolanteProvedoresDTO {
     private String nombre;
     private String telefono;
     private String documento;
-    private Map<Integer,String> idProductos;
+    private Map<String,Integer> idProductos;
 
     public VolanteProvedoresDTO() {
     }
 
-    public VolanteProvedoresDTO(String id, String nombre, String telefono, String documento, Map<Integer, String> idProductos) {
+    public VolanteProvedoresDTO(String id, String nombre, String telefono, String documento, Map<String, Integer> idProductos) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -53,11 +53,11 @@ public class VolanteProvedoresDTO {
         this.documento = documento;
     }
 
-    public Map<Integer, String> getIdProductos() {
+    public Map<String, Integer> getIdProductos() {
         return idProductos;
     }
 
-    public void setIdProductos(Map<Integer, String> idProductos) {
+    public void setIdProductos(Map<String, Integer> idProductos) {
         this.idProductos = idProductos;
     }
 }

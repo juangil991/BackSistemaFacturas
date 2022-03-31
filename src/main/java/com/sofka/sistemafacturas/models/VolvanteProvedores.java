@@ -14,7 +14,7 @@ public class VolvanteProvedores {
     private String nombre;
     private String telefono;
     private String documento;
-    private Map<Integer,String> idProductos;
+    private Map<String,Integer> idProductos;
 
     public VolvanteProvedores() {
     }
@@ -51,11 +51,11 @@ public class VolvanteProvedores {
         this.documento = documento;
     }
 
-    public Map<Integer, String> getIdProductos() {
+    public Map<String, Integer> getIdProductos() {
         return idProductos;
     }
 
-    public void setIdProductos(Map<Integer, String> idProductos) {
+    public void setIdProductos(Map<String, Integer> idProductos) {
         this.idProductos = idProductos;
     }
 }

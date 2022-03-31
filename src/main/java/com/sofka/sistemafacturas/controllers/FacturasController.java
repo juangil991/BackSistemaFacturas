@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class FacturasController {
     @Autowired
@@ -38,7 +39,7 @@ public class FacturasController {
         return facturaService.obtenerPorDocumentoCliente(idCliente);
     }
 
-    @PostMapping("/factura/save")
+    @PostMapping("/factura/crear/save")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<FacturaDTO> crearFactura(@RequestBody FacturaDTO facturaDTO){
         return facturaService.crearFactura(facturaDTO);

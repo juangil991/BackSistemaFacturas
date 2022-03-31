@@ -18,24 +18,25 @@ public class VolanteProvedoresService {
 
     private ModelMapper modelMapper= new ModelMapper();
 
-    private Flux<VolanteProvedoresDTO>obtenerVolantes(){
+    public Flux<VolanteProvedoresDTO>obtenerVolantes(){
         return volanteProvedoresRepository.findAll()
                 .flatMap(p->Flux.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
 
-    private Mono<VolanteProvedoresDTO>obtenerVolantesPorId(String id){
+    public Mono<VolanteProvedoresDTO>obtenerVolantesPorId(String id){
         return volanteProvedoresRepository.findById(id)
                 .flatMap(p->Mono.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
 
-    private Flux<VolanteProvedoresDTO>obtenerVolantesPorDocumento(String documento){
+    public Flux<VolanteProvedoresDTO>obtenerVolantesPorDocumento(String documento){
         return volanteProvedoresRepository.findByDocumento(documento)
                 .flatMap(p->Flux.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
 
-    private Mono<VolanteProvedoresDTO>crearVolante(VolanteProvedoresDTO volanteProvedoresDTO){
+    public Mono<VolanteProvedoresDTO>crearVolante(VolanteProvedoresDTO volanteProvedoresDTO){
         VolvanteProvedores volvanteProvedores= modelMapper.map(volanteProvedoresDTO,VolvanteProvedores.class);
-        return this.volanteProvedoresRepository.save(volvanteProvedores)
+        return this.volanteProvedoresRepository
+                .save(volvanteProvedores)
                 .flatMap(p->Mono.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
 
@@ -52,8 +53,6 @@ public class VolanteProvedoresService {
                 .flatMap(p -> this.volanteProvedoresRepository.deleteById(p.getId()).thenReturn(p))
                 .flatMap(p->Mono.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
-
-
 
 
 }
