@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Service
 public class InventarioProductoService {
 
@@ -63,18 +65,20 @@ public class InventarioProductoService {
                     return crearProducto(inventarioProducto);
                 });
     }
-    public Mono<ProductoDTO>actualizarCantidadProducto(String id, int cantidad){
+    public Mono<ProductoDTO> venderProducto(String id, int cantidad){
         return this.inventarioRepository.findByIdAndTipo(id,"producto")
                 .flatMap(p->{
-                    p.setCantidadProducto(cantidad);
+                    int cantidadNueva=p.getCantidadProducto()-cantidad;
+                    p.setCantidadProducto(cantidadNueva);
                     return crearProducto(modelMapper.map(p, ProductoDTO.class));
                 });
     }
+
+
 
     public Mono<ProductoDTO>eliminarProducto(String id){
         return this.inventarioRepository.findByIdAndTipo(id,"producto")
                 .flatMap(p -> this.inventarioRepository.deleteById(p.getId()).thenReturn(p))
                 .flatMap(p->Mono.just(modelMapper.map(p, ProductoDTO.class)));
     }
-
 }

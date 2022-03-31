@@ -1,6 +1,7 @@
 package com.sofka.sistemafacturas.services;
 
 import com.sofka.sistemafacturas.dtos.FacturaDTO;
+import com.sofka.sistemafacturas.dtos.ProductoDTO;
 import com.sofka.sistemafacturas.models.Inventario;
 import com.sofka.sistemafacturas.repositories.InventarioRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,8 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FacturaService {
@@ -61,4 +64,5 @@ public class FacturaService {
                     return crearFactura(facturaDTO);
                 });
     }
+
 }

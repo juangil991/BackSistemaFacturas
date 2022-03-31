@@ -53,6 +53,4 @@ public class VolanteProvedoresService {
                 .flatMap(p -> this.inventarioRepository.deleteById(p.getId()).thenReturn(p))
                 .flatMap(p->Mono.just(modelMapper.map(p,VolanteProvedoresDTO.class)));
     }
-
-
 }

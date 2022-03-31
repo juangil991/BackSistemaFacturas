@@ -1,9 +1,11 @@
 package com.sofka.sistemafacturas.models;
 
+import com.sofka.sistemafacturas.dtos.ProductoDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Document
@@ -12,7 +14,7 @@ public class Inventario {
     @Id
     private String id;
 
-    private Map<String,Integer> idProducto;
+    private List<ProductoDTO> Productos;
     private String tipo;
     //factura
     private LocalDate fecha;
@@ -40,12 +42,12 @@ public class Inventario {
         this.id = id;
     }
 
-    public Map<String, Integer> getIdProducto() {
-        return idProducto;
+    public List<ProductoDTO> getProductos() {
+        return Productos;
     }
 
-    public void setIdProducto(Map<String, Integer> idProducto) {
-        this.idProducto = idProducto;
+    public void setProductos(List<ProductoDTO> productos) {
+        Productos = productos;
     }
 
     public String getTipo() {

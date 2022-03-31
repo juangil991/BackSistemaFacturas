@@ -53,6 +53,11 @@ public class InventarioProductoController {
                                                 @RequestBody ProductoDTO inventarioProducto){
         return productoService.actualizarProducto(id,inventarioProducto);
     }
+    @PutMapping("/producto/{id}/vender")
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ProductoDTO> venderCantidadProducto(@PathVariable("id") String id, @RequestParam int cantidad){
+        return productoService.venderProducto(id,cantidad);
+    }
 
     @DeleteMapping("/producto/{id}")
     @ResponseStatus(HttpStatus.OK)

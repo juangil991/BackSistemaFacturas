@@ -8,21 +8,10 @@ public class VolanteProvedoresDTO {
     private String nombreProvedor;
     private String telefonoProvedor;
     private String documentoProvedor;
-    private Map<String,Integer> idProducto;
+    private List<ProductoDTO> Productos;
     private String tipo;
 
     public VolanteProvedoresDTO() {
-    }
-
-    public VolanteProvedoresDTO(String id, String nombreProvedor,
-                                String telefonoProvedor, String documentoProvedor,
-                                Map<String, Integer> idProducto, String tipo) {
-        this.id = id;
-        this.nombreProvedor = nombreProvedor;
-        this.telefonoProvedor = telefonoProvedor;
-        this.documentoProvedor = documentoProvedor;
-        this.idProducto = idProducto;
-        this.tipo = tipo;
     }
 
     public String getId() {
@@ -57,12 +46,12 @@ public class VolanteProvedoresDTO {
         this.documentoProvedor = documentoProvedor;
     }
 
-    public Map<String, Integer> getIdProducto() {
-        return idProducto;
+    public List<ProductoDTO> getProductos() {
+        return Productos;
     }
 
-    public void setIdProducto(Map<String, Integer> idProducto) {
-        this.idProducto = idProducto;
+    public void setProductos(List<ProductoDTO> productos) {
+        Productos = productos;
     }
 
     public String getTipo() {

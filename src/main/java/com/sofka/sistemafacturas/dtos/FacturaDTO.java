@@ -11,23 +11,11 @@ public class FacturaDTO {
     private String nombreCliente;
     private String documentoCliente;
     private String nombreCajero;
-    private Map<String,Integer> idProducto;
+    private List<ProductoDTO> Productos;
     private Long total;
     private String tipo;
 
     public FacturaDTO() {
-    }
-
-    public FacturaDTO(String id, LocalDate fecha, String nombreCliente, String documentoCliente,
-                      String nombreCajero, Map<String, Integer> idProducto, Long total, String tipo) {
-        this.id = id;
-        this.fecha = fecha;
-        this.nombreCliente = nombreCliente;
-        this.documentoCliente = documentoCliente;
-        this.nombreCajero = nombreCajero;
-        this.idProducto = idProducto;
-        this.total = total;
-        this.tipo = tipo;
     }
 
     public String getId() {
@@ -70,12 +58,12 @@ public class FacturaDTO {
         this.nombreCajero = nombreCajero;
     }
 
-    public Map<String, Integer> getIdProducto() {
-        return idProducto;
+    public List<ProductoDTO> getProductos() {
+        return Productos;
     }
 
-    public void setIdProducto(Map<String, Integer> idProducto) {
-        this.idProducto = idProducto;
+    public void setProductos(List<ProductoDTO> productos) {
+        Productos = productos;
     }
 
     public Long getTotal() {
