@@ -1,6 +1,7 @@
 package com.sofka.sistemafacturas.dtos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FacturaDTO {
@@ -15,8 +16,7 @@ public class FacturaDTO {
     public FacturaDTO() {
     }
 
-    public FacturaDTO(LocalDate fecha, String nombreCliente,
-                      String documentoCliente, String nombreCajero, List<String> idProducto, Long total) {
+    public FacturaDTO(LocalDate fecha, String nombreCliente, String documentoCliente, String nombreCajero, List<String> idProducto, Long total) {
         this.fecha = fecha;
         this.nombreCliente = nombreCliente;
         this.documentoCliente = documentoCliente;
@@ -71,5 +71,13 @@ public class FacturaDTO {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

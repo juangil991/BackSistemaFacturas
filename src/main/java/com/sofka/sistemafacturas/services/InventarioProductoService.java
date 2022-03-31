@@ -15,7 +15,7 @@ public class InventarioProductoService {
     @Autowired
     InventarioProductoRepository inventarioRepository;
 
-    ModelMapper modelMapper= new ModelMapper();
+    private ModelMapper modelMapper= new ModelMapper();
 
     public Flux<InventarioProductoDTO> obtenerProductos(){
         return inventarioRepository.findAll()
