@@ -1,24 +1,22 @@
-package com.sofka.sistemafacturas.dtos;
+package com.sofka.sistemafacturas.models;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
 
-public class VolanteProvedoresDTO {
+@Document
+public class VolvanteProvedores {
+    @Id
     private String id;
+
     private String nombre;
     private String telefono;
     private String documento;
     private Map<Integer,String> idProductos;
 
-    public VolanteProvedoresDTO() {
-    }
-
-    public VolanteProvedoresDTO(String id, String nombre, String telefono, String documento, Map<Integer, String> idProductos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.documento = documento;
-        this.idProductos = idProductos;
+    public VolvanteProvedores() {
     }
 
     public String getId() {
