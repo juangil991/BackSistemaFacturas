@@ -22,6 +22,11 @@ public class InventarioProductoService {
                 .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
     }
 
+    public Mono<InventarioProductoDTO>obtenerProductoPorId(String id){
+        return inventarioRepository.findById(id)
+                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+    }
+
     public Mono<InventarioProductoDTO> agregarProducto(InventarioProductoDTO inventarioProducto) {
         InventarioProducto producto = modelMapper.map(inventarioProducto, InventarioProducto.class);
        return this.inventarioRepository
@@ -29,4 +34,38 @@ public class InventarioProductoService {
                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
 
     }
+    public Mono<InventarioProductoDTO>obtenerPorNombre(String nombre){
+        return this.inventarioRepository
+                .findByNombre(nombre)
+                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+
+    }
+
+    public Flux<InventarioProductoDTO>obtenerPorCantidad(int cantidad){
+        return this.inventarioRepository
+                .findByCantidad(cantidad)
+                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
+
+    }
+
+    public Flux<InventarioProductoDTO>obtenerPorPrecio(Long precio){
+        return this.inventarioRepository
+                .findByPrecio(precio)
+                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
+    }
+
+    public Mono<InventarioProductoDTO>actualizarProducto(String id,InventarioProductoDTO inventarioProducto){
+        return this.inventarioRepository.findById(id)
+                .flatMap(p->{
+                    inventarioProducto.setId(id);
+                    return agregarProducto(inventarioProducto);
+                });
+    }
+
+    public Mono<InventarioProductoDTO>eliminarProducto(String id){
+        return this.inventarioRepository.findById(id)
+                .flatMap(p -> this.inventarioRepository.deleteById(p.getId()).thenReturn(p))
+                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+    }
+
 }
