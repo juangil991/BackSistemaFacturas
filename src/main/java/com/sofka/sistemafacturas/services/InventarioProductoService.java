@@ -18,12 +18,15 @@ public class InventarioProductoService {
     ModelMapper modelMapper= new ModelMapper();
 
     public Flux<InventarioProductoDTO> obtenerProductos(){
-        return inventarioRepository.findAll();
+        return inventarioRepository.findAll()
+                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
     }
 
-    public Mono<InventarioProductoDTO> agregarProducto(InventarioProductoDTO inventarioProducto){
-        InventarioProducto producto = modelMapper.map(inventarioProducto,InventarioProducto.class);
-        return inventarioRepository.save(producto);
-    }
+    public Mono<InventarioProductoDTO> agregarProducto(InventarioProductoDTO inventarioProducto) {
+        InventarioProducto producto = modelMapper.map(inventarioProducto, InventarioProducto.class);
+       return this.inventarioRepository
+               .save(producto)
+               .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
 
+    }
 }
