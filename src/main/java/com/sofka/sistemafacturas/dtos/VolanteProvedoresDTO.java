@@ -5,20 +5,24 @@ import java.util.Map;
 
 public class VolanteProvedoresDTO {
     private String id;
-    private String nombre;
-    private String telefono;
-    private String documento;
-    private Map<String,Integer> idProductos;
+    private String nombreProvedor;
+    private String telefonoProvedor;
+    private String documentoProvedor;
+    private Map<String,Integer> idProducto;
+    private String tipo;
 
     public VolanteProvedoresDTO() {
     }
 
-    public VolanteProvedoresDTO(String id, String nombre, String telefono, String documento, Map<String, Integer> idProductos) {
+    public VolanteProvedoresDTO(String id, String nombreProvedor,
+                                String telefonoProvedor, String documentoProvedor,
+                                Map<String, Integer> idProducto, String tipo) {
         this.id = id;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.documento = documento;
-        this.idProductos = idProductos;
+        this.nombreProvedor = nombreProvedor;
+        this.telefonoProvedor = telefonoProvedor;
+        this.documentoProvedor = documentoProvedor;
+        this.idProducto = idProducto;
+        this.tipo = tipo;
     }
 
     public String getId() {
@@ -29,35 +33,43 @@ public class VolanteProvedoresDTO {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreProvedor() {
+        return nombreProvedor;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreProvedor(String nombreProvedor) {
+        this.nombreProvedor = nombreProvedor;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelefonoProvedor() {
+        return telefonoProvedor;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefonoProvedor(String telefonoProvedor) {
+        this.telefonoProvedor = telefonoProvedor;
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getDocumentoProvedor() {
+        return documentoProvedor;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setDocumentoProvedor(String documentoProvedor) {
+        this.documentoProvedor = documentoProvedor;
     }
 
-    public Map<String, Integer> getIdProductos() {
-        return idProductos;
+    public Map<String, Integer> getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdProductos(Map<String, Integer> idProductos) {
-        this.idProductos = idProductos;
+    public void setIdProducto(Map<String, Integer> idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

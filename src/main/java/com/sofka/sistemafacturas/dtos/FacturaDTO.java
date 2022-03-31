@@ -3,6 +3,7 @@ package com.sofka.sistemafacturas.dtos;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FacturaDTO {
     private String id;
@@ -10,19 +11,31 @@ public class FacturaDTO {
     private String nombreCliente;
     private String documentoCliente;
     private String nombreCajero;
-    private List<String> idProducto;
+    private Map<String,Integer> idProducto;
     private Long total;
+    private String tipo;
 
     public FacturaDTO() {
     }
 
-    public FacturaDTO(LocalDate fecha, String nombreCliente, String documentoCliente, String nombreCajero, List<String> idProducto, Long total) {
+    public FacturaDTO(String id, LocalDate fecha, String nombreCliente, String documentoCliente,
+                      String nombreCajero, Map<String, Integer> idProducto, Long total, String tipo) {
+        this.id = id;
         this.fecha = fecha;
         this.nombreCliente = nombreCliente;
         this.documentoCliente = documentoCliente;
         this.nombreCajero = nombreCajero;
         this.idProducto = idProducto;
         this.total = total;
+        this.tipo = tipo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public LocalDate getFecha() {
@@ -57,11 +70,11 @@ public class FacturaDTO {
         this.nombreCajero = nombreCajero;
     }
 
-    public List<String> getIdProducto() {
+    public Map<String, Integer> getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(List<String> idProducto) {
+    public void setIdProducto(Map<String, Integer> idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -73,11 +86,11 @@ public class FacturaDTO {
         this.total = total;
     }
 
-    public String getId() {
-        return id;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

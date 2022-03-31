@@ -1,15 +1,13 @@
 package com.sofka.sistemafacturas.controllers;
 
 import com.sofka.sistemafacturas.dtos.FacturaDTO;
-import com.sofka.sistemafacturas.models.Factura;
 import com.sofka.sistemafacturas.services.FacturaService;
+import com.sofka.sistemafacturas.services.InventarioProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.time.LocalDate;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,6 +20,7 @@ public class FacturasController {
     private Flux<FacturaDTO>obtenerFacturas(){
         return facturaService.obtenerFacturas();
     }
+
     @GetMapping("/factura/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     private Mono<FacturaDTO>obtenerFacturaPorId(@PathVariable("id") String id){
@@ -39,7 +38,7 @@ public class FacturasController {
         return facturaService.obtenerPorDocumentoCliente(idCliente);
     }
 
-    @PostMapping("/factura/crear/save")
+    @PostMapping("/factura/save")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<FacturaDTO> crearFactura(@RequestBody FacturaDTO facturaDTO){
         return facturaService.crearFactura(facturaDTO);

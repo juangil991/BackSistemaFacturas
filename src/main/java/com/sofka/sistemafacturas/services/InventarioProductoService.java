@@ -1,8 +1,8 @@
 package com.sofka.sistemafacturas.services;
 
-import com.sofka.sistemafacturas.dtos.InventarioProductoDTO;
-import com.sofka.sistemafacturas.models.InventarioProducto;
-import com.sofka.sistemafacturas.repositories.InventarioProductoRepository;
+import com.sofka.sistemafacturas.dtos.ProductoDTO;
+import com.sofka.sistemafacturas.models.Inventario;
+import com.sofka.sistemafacturas.repositories.InventarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,59 +13,68 @@ import reactor.core.publisher.Mono;
 public class InventarioProductoService {
 
     @Autowired
-    InventarioProductoRepository inventarioRepository;
+    InventarioRepository inventarioRepository;
+
 
     private ModelMapper modelMapper= new ModelMapper();
 
-    public Flux<InventarioProductoDTO> obtenerProductos(){
-        return inventarioRepository.findAll()
-                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
+    public Flux<ProductoDTO> obtenerProductos(){
+        return inventarioRepository.findByTipo("producto")
+                .flatMap(p->Flux.just(modelMapper.map(p, ProductoDTO.class)));
     }
 
-    public Mono<InventarioProductoDTO>obtenerProductoPorId(String id){
+    public Mono<ProductoDTO>obtenerProductoPorId(String id){
         return inventarioRepository.findById(id)
-                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+                .flatMap(p->Mono.just(modelMapper.map(p, ProductoDTO.class)));
     }
 
-    public Mono<InventarioProductoDTO> agregarProducto(InventarioProductoDTO inventarioProducto) {
-        InventarioProducto producto = modelMapper.map(inventarioProducto, InventarioProducto.class);
+    public Mono<ProductoDTO> crearProducto(ProductoDTO inventarioProducto) {
+        inventarioProducto.setTipo("producto");
+        Inventario producto = modelMapper.map(inventarioProducto, Inventario.class);
        return this.inventarioRepository
                .save(producto)
-               .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+               .flatMap(p->Mono.just(modelMapper.map(p, ProductoDTO.class)));
 
     }
-    public Mono<InventarioProductoDTO>obtenerPorNombre(String nombre){
+    public Mono<ProductoDTO>obtenerPorNombre(String nombre){
         return this.inventarioRepository
-                .findByNombre(nombre)
-                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+                .findByNombreProductoAndTipo(nombre,"producto")
+                .flatMap(p->Mono.just(modelMapper.map(p, ProductoDTO.class)));
 
     }
 
-    public Flux<InventarioProductoDTO>obtenerPorCantidad(int cantidad){
+    public Flux<ProductoDTO>obtenerPorCantidad(int cantidad){
         return this.inventarioRepository
-                .findByCantidad(cantidad)
-                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
+                .findByCantidadProductoAndTipo(cantidad,"producto")
+                .flatMap(p->Flux.just(modelMapper.map(p, ProductoDTO.class)));
 
     }
 
-    public Flux<InventarioProductoDTO>obtenerPorPrecio(Long precio){
+    public Flux<ProductoDTO>obtenerPorPrecio(Long precio){
         return this.inventarioRepository
-                .findByPrecio(precio)
-                .flatMap(p->Flux.just(modelMapper.map(p,InventarioProductoDTO.class)));
+                .findByPrecioProductoAndTipo(precio,"producto")
+                .flatMap(p->Flux.just(modelMapper.map(p, ProductoDTO.class)));
     }
 
-    public Mono<InventarioProductoDTO>actualizarProducto(String id,InventarioProductoDTO inventarioProducto){
+    public Mono<ProductoDTO>actualizarProducto(String id, ProductoDTO inventarioProducto){
         return this.inventarioRepository.findById(id)
                 .flatMap(p->{
                     inventarioProducto.setId(id);
-                    return agregarProducto(inventarioProducto);
+                    return crearProducto(inventarioProducto);
+                });
+    }
+    public Mono<ProductoDTO>actualizarCantidadProducto(String id, int cantidad){
+        return this.inventarioRepository.findByIdAndTipo(id,"producto")
+                .flatMap(p->{
+                    p.setCantidadProducto(cantidad);
+                    return crearProducto(modelMapper.map(p, ProductoDTO.class));
                 });
     }
 
-    public Mono<InventarioProductoDTO>eliminarProducto(String id){
-        return this.inventarioRepository.findById(id)
+    public Mono<ProductoDTO>eliminarProducto(String id){
+        return this.inventarioRepository.findByIdAndTipo(id,"producto")
                 .flatMap(p -> this.inventarioRepository.deleteById(p.getId()).thenReturn(p))
-                .flatMap(p->Mono.just(modelMapper.map(p,InventarioProductoDTO.class)));
+                .flatMap(p->Mono.just(modelMapper.map(p, ProductoDTO.class)));
     }
 
 }
