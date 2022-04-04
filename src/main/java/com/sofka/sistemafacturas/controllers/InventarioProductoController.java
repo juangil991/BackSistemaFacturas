@@ -58,6 +58,11 @@ public class InventarioProductoController {
     private Mono<ProductoDTO> venderCantidadProducto(@PathVariable("id") String id, @RequestParam int cantidad){
         return productoService.venderProducto(id,cantidad);
     }
+    @PutMapping("/producto/{id}/comprar")
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ProductoDTO> comprarCantidadProducto(@PathVariable("id") String id, @RequestParam int cantidad){
+        return productoService.comprarProducto(id,cantidad);
+    }
 
     @DeleteMapping("/producto/{id}")
     @ResponseStatus(HttpStatus.OK)

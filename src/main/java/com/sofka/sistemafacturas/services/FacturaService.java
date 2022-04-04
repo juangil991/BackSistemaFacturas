@@ -42,7 +42,7 @@ public class FacturaService {
 
     public Flux<FacturaDTO>obtenerPorFecha(String fecha){
         return this.inventarioRepository
-                .findByFechaAndTipo( LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy")),"factura")
+                .findByFechaAndTipo( LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd")),"factura")
                 .flatMap(p->Flux.just(modelMapper.map(p,FacturaDTO.class)));
     }
 

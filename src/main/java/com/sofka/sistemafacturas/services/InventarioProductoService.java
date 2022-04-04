@@ -73,8 +73,14 @@ public class InventarioProductoService {
                     return crearProducto(modelMapper.map(p, ProductoDTO.class));
                 });
     }
-
-
+    public Mono<ProductoDTO> comprarProducto(String id, int cantidad){
+        return this.inventarioRepository.findByIdAndTipo(id,"producto")
+                .flatMap(p->{
+                    int cantidadNueva=p.getCantidadProducto()+cantidad;
+                    p.setCantidadProducto(cantidadNueva);
+                    return crearProducto(modelMapper.map(p, ProductoDTO.class));
+                });
+    }
 
     public Mono<ProductoDTO>eliminarProducto(String id){
         return this.inventarioRepository.findByIdAndTipo(id,"producto")
