@@ -4,16 +4,20 @@ public class ProductoDTO {
     private String id;
     private String nombreProducto;
     private Integer cantidadProducto;
+    private Integer maximaCantidad;
+    private Integer minimaCantidad;
     private Long precioProducto;
     private String tipo;
 
     public ProductoDTO() {
     }
 
-    public ProductoDTO(String id, String nombreProducto, Integer cantidadProducto, Long precioProducto, String tipo) {
+    public ProductoDTO(String id, String nombreProducto, Integer cantidadProducto, Integer maximaCantidad, Integer minimaCantidad, Long precioProducto, String tipo) {
         this.id = id;
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
+        this.maximaCantidad = maximaCantidad;
+        this.minimaCantidad = minimaCantidad;
         this.precioProducto = precioProducto;
         this.tipo = tipo;
     }
@@ -56,5 +60,21 @@ public class ProductoDTO {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Integer getMaximaCantidad() {
+        return maximaCantidad;
+    }
+
+    public void setMaximaCantidad(Integer maximaCantidad) {
+        this.maximaCantidad = maximaCantidad;
+    }
+
+    public Integer getMinimaCantidad() {
+        return minimaCantidad;
+    }
+
+    public void setMinimaCantidad(Integer minimaCantidad) {
+        this.minimaCantidad = minimaCantidad;
     }
 }

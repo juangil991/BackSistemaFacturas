@@ -26,6 +26,8 @@ public class Inventario {
     private String nombreProducto;
     private Integer cantidadProducto;
     private Long precioProducto;
+    private Integer maximaCantidad;
+    private Integer minimaCantidad;
     //volante
     private String nombreProvedor;
     private String telefonoProvedor;
@@ -144,5 +146,21 @@ public class Inventario {
 
     public void setDocumentoProvedor(String documentoProvedor) {
         this.documentoProvedor = documentoProvedor;
+    }
+
+    public Integer getMaximaCantidad() {
+        return maximaCantidad;
+    }
+
+    public void setMaximaCantidad(Integer maximaCantidad) {
+        this.maximaCantidad = maximaCantidad;
+    }
+
+    public Integer getMinimaCantidad() {
+        return minimaCantidad;
+    }
+
+    public void setMinimaCantidad(Integer minimaCantidad) {
+        this.minimaCantidad = minimaCantidad;
     }
 }
